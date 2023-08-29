@@ -1,0 +1,63 @@
+//
+// Created by z50036062 on 2023/8/29.
+//
+#include <bits/stdc++.h>
+namespace za{
+    template <typename T>
+    class smallvector{
+    private:
+        int size;
+        int capcity;
+        T* arr;
+    public:
+        int vsize(){
+            return this->size;
+        }
+        int vcapcity(){
+            return this->capcity;
+        }
+
+        T& operator[](const int index){
+            return arr[index];
+        }
+        smallvector(){
+            size=0;
+            capcity=10;
+            arr=(T*)malloc(capcity * sizeof(T));
+        }
+        smallvector(unsigned int n){
+            size=n;
+            capcity=2*n;
+            arr=(T*)malloc(capcity * sizeof(T));
+        }
+        void push_back(T data){
+            if(size>=0.7*capcity){
+                free(arr);
+                arr=(T*)malloc(2*capcity * sizeof(T));
+                capcity*=2;
+            }
+            arr[size]=data;
+            size++;
+        }
+
+    };
+
+}
+
+using namespace  za;
+using namespace std;
+int main(){
+    smallvector<int> myvector(3);
+    myvector[1]=2;
+    cout<<myvector.vsize()<<endl;
+    cout<<myvector.vcapcity()<<endl;
+    myvector.push_back(3);
+    myvector.push_back(3);
+    myvector.push_back(3);
+    myvector.push_back(3);
+    myvector.push_back(3);
+    myvector.push_back(3);
+    myvector.push_back(3);
+    cout<<myvector.vsize()<<endl;
+    cout<<myvector.vcapcity()<<endl;
+}
